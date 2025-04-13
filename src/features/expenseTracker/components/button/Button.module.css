@@ -1,0 +1,31 @@
+/* Common button styles */
+.commonButton {
+
+    height: 38px;
+    font-family: Ubuntu;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+
+    border-radius: 15px;
+    border: none; /* Optional: Remove default border */
+
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.3s ease; /* Smooth animation on click */
+}
+
+.commonButton:active {
+    transform: scale(0.95); /* Slightly shrink the button on click */
+}
+
+/* Specific styles for income button */
+.buttonIncome {
+    background: linear-gradient(90deg, #B5DC52 0%, #89E148 100%);
+}
+
+/* Specific styles for expense button */
+.buttonExpense {
+    background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
+}

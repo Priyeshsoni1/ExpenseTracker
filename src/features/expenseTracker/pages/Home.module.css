@@ -1,0 +1,62 @@
+.addButtonWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  
+
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: flex-start;
+    padding: 1rem;
+
+}
+.container
+{
+    background:var(--primary-bg-color);
+overflow: hidden;
+    min-height: 100vh;
+}
+.container h1
+{
+   color: #fff;
+    margin-bottom: 10px;
+}
+.cardsWrapper
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 52px;
+    padding: 4rem 5px;
+    background: #626262;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    margin-bottom: 32px;
+    align-self: center;
+    align-content: center;
+
+}
+@media screen and (max-width: 768px) {
+    .cardsWrapper {
+        grid-template-columns: 1fr; /* Two columns for medium screens */
+        padding: 1rem 5px;
+    }
+    
+}
+.transactionsWrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Default for larger screens */
+    gap: 32px;
+}
+
+
+
+@media (max-width: 480px) {
+    .transactionsWrapper {
+        grid-template-columns:3fr; /* Single-column layout for mobile screens */
+        gap: 1px; /* Reduce gap for smaller screens */
+    }
+}
