@@ -58,7 +58,7 @@ const RecentTransactions = ({ data, setExpenseList }) => {
                 )}
               </div>
               <div style={styles.textSection}>
-                <div style={styles.category}>{transaction.category}</div>
+                <div style={styles.category}>{transaction.title}</div>
                 <div style={styles.date}>{transaction.date}</div>
               </div>
             </div>
