@@ -1,3 +1,4 @@
+import { useSnackbar } from "notistack";
 import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
 const AddExpenseDialog = ({
@@ -13,6 +14,7 @@ const AddExpenseDialog = ({
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   console.log(initialData, "initialData");
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title || "");
@@ -35,11 +37,19 @@ const AddExpenseDialog = ({
 
     if (add) {
       localStorage.setItem("expense", JSON.stringify([...expenseOld, data]));
+      enqueueSnackbar(`Added ${title} to your expense`, {
+        variant: "success",
+        autoHideDuration: 3000,
+      });
     } else {
       const newExpense = expenseOld.filter((item) => {
         if (item?.id != initialData?.id) return item;
       });
       localStorage.setItem("expense", JSON.stringify([...newExpense, data]));
+      enqueueSnackbar(`Updated ${title} to your expense`, {
+        variant: "success",
+        autoHideDuration: 3000,
+      });
     }
 
     // Close the dialog
@@ -56,6 +66,7 @@ const AddExpenseDialog = ({
           <div style={styles.inputRow}>
             <input
               type="text"
+              name="title"
               placeholder="Title"
               required
               style={styles.input}
@@ -64,6 +75,7 @@ const AddExpenseDialog = ({
             />
             <input
               type="number"
+              name="price"
               placeholder="Price"
               required
               style={styles.input}
@@ -74,6 +86,7 @@ const AddExpenseDialog = ({
           <div style={styles.inputRow}>
             <select
               style={styles.input}
+              name="category"
               required
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -86,6 +99,7 @@ const AddExpenseDialog = ({
             </select>
             <input
               required
+              name="date"
               type="date"
               style={styles.input}
               value={date}

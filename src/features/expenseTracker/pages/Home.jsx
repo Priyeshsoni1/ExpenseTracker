@@ -90,7 +90,7 @@ const Home = () => {
   return (
     <>
       <div className={styles.addButtonWrapper}>
-        <h3>Expense Tracker</h3>
+        <h1>Expense Tracker</h1>
       </div>
       <div className={styles.container}>
         <div className={styles.cardsWrapper}>

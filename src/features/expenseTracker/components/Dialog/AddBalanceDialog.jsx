@@ -36,8 +36,8 @@ const AddBalanceDialog = ({
         <form onSubmit={handleSubmit}>
           <div style={styles.inputRow}>
             <input
-              type="text"
-              placeholder="Balance"
+              type="number"
+              placeholder="Income Amount"
               required
               style={styles.input}
               value={balance}
