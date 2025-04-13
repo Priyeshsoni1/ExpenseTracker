@@ -2,7 +2,6 @@ import { useSnackbar } from "notistack";
 import React, { useState, useEffect } from "react";
 
 const AddBalanceDialog = ({
-  dialogTitle = "Add Expense",
   isOpen,
   onClose,
   onAddExpense,
@@ -32,7 +31,7 @@ const AddBalanceDialog = ({
   return (
     <div style={styles.overlay}>
       <div style={styles.dialog}>
-        <h2 style={styles.title}>{dialogTitle}</h2>
+        <h2 style={styles.title}>{"Add Balance"}</h2>
         <form onSubmit={handleSubmit}>
           <div style={styles.inputRow}>
             <input
@@ -48,10 +47,10 @@ const AddBalanceDialog = ({
               type="submit"
               style={{ ...styles.input, ...styles.addButton }}
             >
-              Add Expense
+              Add Balance
             </button>
             <button
-              type="button"
+              type="cancel"
               style={{ ...styles.input, ...styles.cancelButton }}
               onClick={onClose}
             >

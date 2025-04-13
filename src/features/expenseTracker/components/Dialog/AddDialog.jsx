@@ -16,13 +16,13 @@ const AddExpenseDialog = ({
   console.log(initialData, "initialData");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   useEffect(() => {
-    if (initialData) {
+    if (initialData && !add) {
       setTitle(initialData.title || "");
       setPrice(initialData.price || "");
       setCategory(initialData.category || "");
       setDate(initialData.date || "");
     }
-  }, [initialData]);
+  }, [initialData, add]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,10 +33,10 @@ const AddExpenseDialog = ({
       : { ...initialData, title, price: parseFloat(price), category, date };
 
     // Retrieve existing expenses from localStorage
-    const expenseOld = JSON.parse(localStorage.getItem("expense")) || [];
+    const expenseOld = JSON.parse(localStorage.getItem("expenses")) || [];
 
     if (add) {
-      localStorage.setItem("expense", JSON.stringify([...expenseOld, data]));
+      localStorage.setItem("expenses", JSON.stringify([...expenseOld, data]));
       enqueueSnackbar(`Added ${title} to your expense`, {
         variant: "success",
         autoHideDuration: 3000,
@@ -45,7 +45,7 @@ const AddExpenseDialog = ({
       const newExpense = expenseOld.filter((item) => {
         if (item?.id != initialData?.id) return item;
       });
-      localStorage.setItem("expense", JSON.stringify([...newExpense, data]));
+      localStorage.setItem("expenses", JSON.stringify([...newExpense, data]));
       enqueueSnackbar(`Updated ${title} to your expense`, {
         variant: "success",
         autoHideDuration: 3000,
@@ -115,7 +115,7 @@ const AddExpenseDialog = ({
               Add Expense
             </button>
             <button
-              type="button"
+              type="cancel"
               style={{ ...styles.input, ...styles.cancelButton }}
               onClick={onClose}
             >

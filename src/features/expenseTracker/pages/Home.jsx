@@ -32,7 +32,7 @@ const Home = () => {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     const localBalance = localStorage.getItem("balance");
-    const localExpense = JSON.parse(localStorage.getItem("expense"));
+    const localExpense = JSON.parse(localStorage.getItem("expenses"));
     if (localExpense) {
       setExpenseList(localExpense);
       const totalExpense = localExpense.reduce((acc, curr) => {
@@ -62,7 +62,7 @@ const Home = () => {
       localStorage.setItem("balance", JSON.stringify(5000));
     }
     setIsMounted(true);
-  }, [localStorage.getItem("balance"), localStorage.getItem("expense")]);
+  }, [localStorage.getItem("balance"), localStorage.getItem("expenses")]);
   console.log(expenseList, "expenseList");
   useEffect(() => {
     console.log("trigger");
@@ -85,7 +85,7 @@ const Home = () => {
       }, {});
       setCategoryCounts(categoryCountLocal);
     }
-  }, [isMounted, expenseList, localStorage.getItem("expense")]);
+  }, [isMounted, expenseList, localStorage.getItem("expenses")]);
 
   return (
     <>

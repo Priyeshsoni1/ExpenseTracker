@@ -20,7 +20,7 @@ const RecentTransactions = ({ data }) => {
   const handleDelete = (id) => {
     console.log(id);
     // Get the current expense list from localStorage
-    const localExpense = JSON.parse(localStorage.getItem("expense")) || [];
+    const localExpense = JSON.parse(localStorage.getItem("expenses")) || [];
 
     // Filter out the transaction with the matching id
     const updatedExpense = localExpense.filter(
@@ -28,7 +28,7 @@ const RecentTransactions = ({ data }) => {
     );
 
     // Update localStorage with the filtered list
-    localStorage.setItem("expense", JSON.stringify(updatedExpense));
+    localStorage.setItem("expenses", JSON.stringify(updatedExpense));
 
     // Optionally, update the state if needed
     setCount(0); // Reset pagination if necessary

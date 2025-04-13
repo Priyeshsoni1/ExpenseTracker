@@ -10,7 +10,7 @@ const Card = ({ title, buttonTitle, income, onClick, money }) => {
           className={styles.price}
           style={{ color: income ? "#9DFF5B" : "#F4BB4A" }}
         >
-          {money}
+          ${money}
         </span>
       </span>
       <Button onClick={onClick} success={income}>
