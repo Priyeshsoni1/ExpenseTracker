@@ -6,6 +6,7 @@ const AddExpenseDialog = ({
   isOpen,
   onClose,
   onAddExpense,
+  setExpenseList,
   initialData = {},
   add = true,
 }) => {
@@ -34,24 +35,36 @@ const AddExpenseDialog = ({
 
     // Retrieve existing expenses from localStorage
     const expenseOld = JSON.parse(localStorage.getItem("expenses")) || [];
-
+    const balance = JSON.parse(localStorage.getItem("balance")) || 0;
     if (add) {
       localStorage.setItem("expenses", JSON.stringify([...expenseOld, data]));
       enqueueSnackbar(`Added ${title} to your expense`, {
         variant: "success",
         autoHideDuration: 3000,
       });
+      localStorage.setItem(
+        "balance",
+        JSON.stringify(balance - parseFloat(price))
+      );
     } else {
       const newExpense = expenseOld.filter((item) => {
         if (item?.id != initialData?.id) return item;
       });
+      setExpenseList([...newExpense, data]);
       localStorage.setItem("expenses", JSON.stringify([...newExpense, data]));
+      localStorage.setItem(
+        "balance",
+        JSON.stringify(balance + parseFloat(initialData.price) - price)
+      );
       enqueueSnackbar(`Updated ${title} to your expense`, {
         variant: "success",
         autoHideDuration: 3000,
       });
     }
-
+    setTitle("");
+    setPrice("");
+    setCategory("");
+    setDate("");
     // Close the dialog
     onClose();
   };

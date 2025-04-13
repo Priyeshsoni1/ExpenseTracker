@@ -5,7 +5,7 @@ import { MdOutlineCancel, MdOutlineTravelExplore } from "react-icons/md";
 import { PiPopcorn } from "react-icons/pi";
 import AddBalanceDialog from "../Dialog/AddBalanceDialog";
 import AddExpenseDialog from "../Dialog/AddDialog";
-const RecentTransactions = ({ data }) => {
+const RecentTransactions = ({ data, setExpenseList }) => {
   const [count, setCount] = useState(0);
   const transactions = data?.slice(3 * count, 3 * (count + 1)) || [];
   const [isOpenEdit, setIsOpenEdit] = useState(false);
@@ -17,18 +17,24 @@ const RecentTransactions = ({ data }) => {
     date: "",
   });
   console.log(editData, "inititalData");
-  const handleDelete = (id) => {
-    console.log(id);
+  const handleDelete = (transactions) => {
     // Get the current expense list from localStorage
     const localExpense = JSON.parse(localStorage.getItem("expenses")) || [];
 
     // Filter out the transaction with the matching id
     const updatedExpense = localExpense.filter(
-      (transaction) => transaction.id !== id
+      (transaction) => transaction.id !== transactions.id
     );
-
+    setExpenseList(updatedExpense);
     // Update localStorage with the filtered list
     localStorage.setItem("expenses", JSON.stringify(updatedExpense));
+    localStorage.setItem(
+      "balance",
+      JSON.stringify(
+        parseFloat(localStorage.getItem("balance")) +
+          parseFloat(transactions.price)
+      )
+    );
 
     // Optionally, update the state if needed
     setCount(0); // Reset pagination if necessary
@@ -60,7 +66,7 @@ const RecentTransactions = ({ data }) => {
               <div style={styles.price}>₹{transaction.price}</div>
               <button
                 style={styles.actionCancel}
-                onClick={() => handleDelete(transaction.id)}
+                onClick={() => handleDelete(transaction)}
               >
                 <MdOutlineCancel />
               </button>
@@ -107,6 +113,7 @@ const RecentTransactions = ({ data }) => {
         initialData={editData || {}}
         isOpen={isOpenEdit}
         add={false}
+        setExpenseList={setExpenseList}
         onClose={() => setIsOpenEdit(false)}
       />
     </div>

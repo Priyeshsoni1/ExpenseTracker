@@ -85,7 +85,7 @@ const Home = () => {
       }, {});
       setCategoryCounts(categoryCountLocal);
     }
-  }, [isMounted, expenseList, localStorage.getItem("expenses")]);
+  }, [isMounted, expenseList]);
 
   return (
     <>
@@ -112,7 +112,10 @@ const Home = () => {
         </div>{" "}
         <div className={styles.transactionsWrapper}>
           {" "}
-          <RecentTransactions data={expenseList} />
+          <RecentTransactions
+            data={expenseList}
+            setExpenseList={setExpenseList}
+          />
           <BarChartComp data={categroyCounts} />
         </div>
         <AddExpenseDialog
